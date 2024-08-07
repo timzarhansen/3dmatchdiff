@@ -3,7 +3,7 @@ import numpy as np
 from functools import partial
 import torch
 import predator.cpp_wrappers.cpp_subsampling.grid_subsampling as cpp_subsampling
-import predator.cpp_wrappers.cpp_neighbors.neighbors as cpp_neighbors
+import predator.cpp_wrappers.cpp_neighbors.radius_neighbors as cpp_neighbors
 from predator.lib.timer import Timer
 from predator.lib.utils import load_obj, natural_key
 from predator.datasets.indoor import IndoorDataset
@@ -232,7 +232,7 @@ def get_datasets(config):
     if(config.dataset=='indoor'):
         info_train = load_obj(config.train_info)
         info_val = load_obj(config.val_info)
-        info_benchmark = load_obj(f'configs/indoor/{config.benchmark}.pkl')
+        info_benchmark = load_obj(f'predator/configs/indoor/{config.benchmark}.pkl')
 
         train_set = IndoorDataset(info_train,config,data_augmentation=True)
         val_set = IndoorDataset(info_val,config,data_augmentation=False)

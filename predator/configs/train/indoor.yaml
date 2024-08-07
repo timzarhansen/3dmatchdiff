@@ -5,7 +5,7 @@ misc:
   verbose: True
   verbose_freq: 1000
   snapshot_freq: 1
-  pretrain: ''
+  pretrain: '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/indoor/checkpoints/model_best_loss.pth'
 
 
 model:
@@ -50,7 +50,7 @@ loss:
 
 optimiser:
   optimizer: SGD
-  max_epoch: 40
+  max_epoch: 45
   lr: 0.005
   weight_decay: 0.000001
   momentum: 0.98
@@ -62,12 +62,12 @@ optimiser:
 dataset:
   dataset: indoor
   benchmark: 3DMatch
-  root: data/indoor
-  batch_size: 1 
+  root: /home/tim-external/dataFolder/3dmatch/models/predator/data/indoor
+  batch_size: 1
   num_workers: 6 
   augment_noise: 0.005
-  train_info: configs/indoor/train_info.pkl
-  val_info: configs/indoor/val_info.pkl
+  train_info: predator/configs/indoor/train_info.pkl
+  val_info: predator/configs/indoor/val_info.pkl
 
 demo:
   src_pcd: assets/cloud_bin_21.pth

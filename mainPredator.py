@@ -6,7 +6,7 @@ from predator.models.architectures import KPFCNN
 from predator.lib.utils import setup_seed, load_config
 from predator.lib.tester import get_trainer
 from predator.lib.loss import MetricLoss
-from config.models import architectures
+from predator.configs.models import architectures
 
 from torch import optim
 
@@ -19,9 +19,9 @@ if __name__ == '__main__':
     parser.add_argument('config', type=str, help= 'Path to the config file.')
     args = parser.parse_args()
     config = load_config(args.config)
-    config['snapshot_dir'] = 'snapshot/%s' % config['exp_dir']
-    config['tboard_dir'] = 'snapshot/%s/tensorboard' % config['exp_dir']
-    config['save_dir'] = 'snapshot/%s/checkpoints' % config['exp_dir']
+    config['snapshot_dir'] = '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/%s' % config['exp_dir']
+    config['tboard_dir'] = '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/%s/tensorboard' % config['exp_dir']
+    config['save_dir'] = '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/%s/checkpoints' % config['exp_dir']
     config = edict(config)
 
     os.makedirs(config.snapshot_dir, exist_ok=True)
@@ -38,9 +38,9 @@ if __name__ == '__main__':
         config.device = torch.device('cpu')
     
     # backup the files
-    os.system(f'cp -r models {config.snapshot_dir}')
-    os.system(f'cp -r datasets {config.snapshot_dir}')
-    os.system(f'cp -r lib {config.snapshot_dir}')
+    os.system(f'cp -r predator/models {config.snapshot_dir}')
+    os.system(f'cp -r predator/datasets {config.snapshot_dir}')
+    os.system(f'cp -r predator/lib {config.snapshot_dir}')
     shutil.copy2('mainPredator.py', config.snapshot_dir)
     
     
