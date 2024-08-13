@@ -100,7 +100,7 @@ for batch_size in batch_sizes:
             )
             optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=0.0)
             writer = SummaryWriter(
-                f"/home/tim-external/tensorboard/CNN_test/MNIST{model_name}{batch_size}LR{learning_rate}"
+                f"~/tensorboard/1/MNIST{model_name}{batch_size}LR{learning_rate}"
             )
 
             # Visualize model in TensorBoard
