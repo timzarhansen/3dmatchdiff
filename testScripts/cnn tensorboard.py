@@ -72,7 +72,7 @@ num_epochs = 3
 
 # Load Data
 train_dataset = datasets.MNIST(
-    root="/home/tim-external/dataFolder/mnist", train=True, transform=transforms.ToTensor(), download=True
+    root="~/dataFolder/mnist", train=True, transform=transforms.ToTensor(), download=True
 )
 
 # To do hyperparameter search, include more batch_sizes you want to try

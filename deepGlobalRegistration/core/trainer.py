@@ -45,8 +45,10 @@ class WeightedProcrustesTrainer:
       logging.warning('Warning: There\'s no CUDA support on this machine, '
                       'training is performed on CPU.')
       raise ValueError('GPU not available, but cuda flag set')
-    self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
+    if config.use_gpu:
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    else:
+        self.device = torch.device('cpu')
     self.config = config
 
     # Training config
@@ -78,7 +80,7 @@ class WeightedProcrustesTrainer:
     FeatModel = load_model(config.feat_model)
     InlierModel = load_model(config.inlier_model)
 
-    num_feats = 6 if self.config.inlier_feature_type == 'coords' else 1
+
     self.feat_model = FeatModel(num_feats,
                                 config.feat_model_n_out,
                                 bn_momentum=config.bn_momentum,
@@ -86,7 +88,7 @@ class WeightedProcrustesTrainer:
                                 normalize_feature=config.normalize_feature).to(
                                     self.device)
     logging.info(self.feat_model)
-
+    num_feats = 6 if self.config.inlier_feature_type == 'coords' else 1
     self.inlier_model = InlierModel(num_feats,
                                     1,
                                     bn_momentum=config.bn_momentum,

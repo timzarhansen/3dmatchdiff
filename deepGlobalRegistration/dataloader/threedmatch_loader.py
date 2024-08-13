@@ -6,6 +6,8 @@
 # - Christopher Choy, JunYoung Gwak, Silvio Savarese, 4D Spatio-Temporal ConvNets: Minkowski Convolutional Neural Networks, CVPR 2019
 import glob
 
+import numpy as np
+import open3d as o3d
 from deepGlobalRegistration.dataloader.base_loader import *
 from deepGlobalRegistration.dataloader.transforms import *
 
@@ -31,6 +33,7 @@ class IndoorPairDataset(PairDataset):
                          manual_seed, config)
     self.root = root = config.threed_match_dir
     self.use_xyz_feature = config.use_xyz_feature
+
     logging.info(f"Loading the subset {phase} from {root}")
 
     subset_names = open(self.DATA_FILES[phase]).read().split()
@@ -45,6 +48,10 @@ class IndoorPairDataset(PairDataset):
         for fname in fnames:
           self.files.append([fname[0], fname[1]])
 
+
+    self.noise = config.timnoise
+    self.noisevar = config.timnoisevar
+
   def __getitem__(self, idx):
     file0 = os.path.join(self.root, self.files[idx][0])
     file1 = os.path.join(self.root, self.files[idx][1])
@@ -52,6 +59,33 @@ class IndoorPairDataset(PairDataset):
     data1 = np.load(file1)
     xyz0 = data0["pcd"]
     xyz1 = data1["pcd"]
+
+
+    # pcd1 = o3d.geometry.PointCloud()
+    # pcd1.points = o3d.utility.Vector3dVector(xyz0)
+    # o3d.visualization.draw_geometries([pcd1])
+
+    if self.noise:
+      for it in range(np.shape(xyz0)[0]):
+        xyz0[it,:] = xyz0[it,:]+np.random.normal(0, self.noisevar, size=xyz0[it,:].shape)
+      for it in range(np.shape(xyz1)[0]):
+        xyz1[it,:] = xyz1[it,:]+np.random.normal(0, self.noisevar, size=xyz1[it,:].shape)
+
+
+
+    # pcd1 = o3d.geometry.PointCloud()
+    # pcd1.points = o3d.utility.Vector3dVector(xyz0)
+    # o3d.visualization.draw_geometries([pcd1])
+
+
+    # pcd1 = o3d.geometry.PointCloud()
+    # pcd1.points = o3d.utility.Vector3dVector(xyz0)
+    # pcd2 = o3d.geometry.PointCloud()
+    # pcd2.points = o3d.utility.Vector3dVector(xyz1)
+    # o3d.visualization.draw_geometries([pcd2])
+    #
+    # o3d.visualization.draw_geometries([pcd1])
+    # o3d.visualization.draw_geometries([pcd2])
     matching_search_voxel_size = self.matching_search_voxel_size
 
     if self.random_scale and random.random() < 0.95:
@@ -128,9 +162,9 @@ class IndoorPairDataset(PairDataset):
 class ThreeDMatchPairDataset03(IndoorPairDataset):
   OVERLAP_RATIO = 0.3
   DATA_FILES = {
-      'train': './dataloader/split/train_3dmatch.txt',
-      'val': './dataloader/split/val_3dmatch.txt',
-      'test': './dataloader/split/test_3dmatch.txt'
+      'train': 'deepGlobalRegistration/dataloader/split/train_3dmatch.txt',
+      'val': 'deepGlobalRegistration/dataloader/split/val_3dmatch.txt',
+      'test': 'deepGlobalRegistration/dataloader/split/test_3dmatch.txt'
   }
 
 

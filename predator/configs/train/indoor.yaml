@@ -5,11 +5,12 @@ misc:
   verbose: True
   verbose_freq: 1000
   snapshot_freq: 1
-  pretrain: '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/indoor/checkpoints/model_best_loss.pth'
+  pretrain: ''
+#  /home/tim-external/dataFolder/3dmatch/models/predator/snapshot/indoor/checkpoints/model_best_loss.pth
 
 
 model:
-  num_layers: 4 
+  num_layers: 4
   in_points_dim: 3
   first_feats_dim: 128
   final_feats_dim: 32
@@ -50,7 +51,7 @@ loss:
 
 optimiser:
   optimizer: SGD
-  max_epoch: 45
+  max_epoch: 2
   lr: 0.005
   weight_decay: 0.000001
   momentum: 0.98

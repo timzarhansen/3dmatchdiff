@@ -22,13 +22,13 @@ def str2bool(v):
 
 # yapf: disable
 logging_arg = add_argument_group('Logging')
-logging_arg.add_argument('--out_dir', type=str, default='/home/tim-external/dataFolder/3dmatch/models/deepGlobalRegistration/')
+logging_arg.add_argument('--out_dir', type=str, default='/home/tim-external/dataFolder/3dmatch/models/deepGlobalRegistration/test/')
 
 trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
 
 # Batch setting
-trainer_arg.add_argument('--batch_size', type=int, default=16)
+trainer_arg.add_argument('--batch_size', type=int, default=8)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 # Data loader configs
@@ -66,7 +66,7 @@ trainer_arg.add_argument('--best_val_metric', type=str, default='succ_rate')
 # Inlier detection trainer
 inlier_arg = add_argument_group('Inlier')
 inlier_arg.add_argument('--inlier_model', type=str, default='ResUNetBNF')
-inlier_arg.add_argument('--inlier_feature_type', type=str, default='ones')
+inlier_arg.add_argument('--inlier_feature_type', type=str, default='coords')
 inlier_arg.add_argument('--inlier_conv1_kernel_size', type=int, default=3)
 inlier_arg.add_argument('--inlier_knn', type=int, default=1)
 inlier_arg.add_argument('--knn_search_method', type=str, default='gpu')
@@ -101,12 +101,12 @@ opt_arg.add_argument('--icp_cache_path', type=str, default="icp")
 
 # Misc
 misc_arg = add_argument_group('Misc')
-misc_arg.add_argument('--use_gpu', type=str2bool, default=True)
-misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFolder/3dmatch/models/deepGlobalRegistration/dlModels/dlModels/2019-08-16_19-21-47.pth')
+misc_arg.add_argument('--use_gpu', type=str2bool, default=False)
+misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFolder/3dmatch/models/deepGlobalRegistration/dlModels/2019-08-16_19-21-47.pth')
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)
 misc_arg.add_argument('--resume_dir', type=str, default=None)
-misc_arg.add_argument('--train_num_workers', type=int, default=2)
+misc_arg.add_argument('--train_num_workers', type=int, default=1)
 misc_arg.add_argument('--val_num_workers', type=int, default=1)
 misc_arg.add_argument('--test_num_workers', type=int, default=2)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)
@@ -136,7 +136,9 @@ demo_arg = add_argument_group('demo')
 demo_arg.add_argument('--pcd0', default="redkitchen_000.ply", type=str)
 demo_arg.add_argument('--pcd1', default="redkitchen_010.ply", type=str)
 # yapf: enable
-
+# Custom Tim Stuff
+data_arg.add_argument('--timnoise', type=str2bool, default=True)
+data_arg.add_argument('--timnoisevar', type=float, default=0.02)
 
 def get_config():
   args = parser.parse_args()
