@@ -51,6 +51,9 @@ class IndoorPairDataset(PairDataset):
 
     self.noise = config.timnoise
     self.noisevar = config.timnoisevar
+    if phase in ['val', 'test', 'trainval']:
+      self.noise = False
+      self.noisevar = 0.0
 
   def __getitem__(self, idx):
     file0 = os.path.join(self.root, self.files[idx][0])

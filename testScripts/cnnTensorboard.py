@@ -96,7 +96,7 @@ for batch_size in batch_sizes:
             model.train()
             criterion = nn.CrossEntropyLoss()
             train_loader = DataLoader(
-                dataset=train_dataset, batch_size=batch_size, shuffle=True
+                dataset=train_dataset, batch_size=batch_size, shuffle=True,num_workers = 1
             )
             optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=0.0)
             writer = SummaryWriter(
