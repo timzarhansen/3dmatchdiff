@@ -28,7 +28,7 @@ trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
 
 # Batch setting
-trainer_arg.add_argument('--batch_size', type=int, default=1)
+trainer_arg.add_argument('--batch_size', type=int, default=32)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 # Data loader configs
@@ -49,9 +49,9 @@ trainer_arg.add_argument(
 trainer_arg.add_argument('--save_epoch_freq', type=int, default=1)
 trainer_arg.add_argument('--val_epoch_freq', type=int, default=1)
 
-trainer_arg.add_argument('--stat_freq', type=int, default=1, help='Frequency for writing stats to log')
+trainer_arg.add_argument('--stat_freq', type=int, default=40, help='Frequency for writing stats to log')
 trainer_arg.add_argument('--test_valid', type=str2bool, default=False)
-trainer_arg.add_argument('--val_max_iter', type=int, default=10)
+trainer_arg.add_argument('--val_max_iter', type=int, default=400)
 
 
 trainer_arg.add_argument('--use_balanced_loss', type=str2bool, default=False)
@@ -106,7 +106,7 @@ misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFol
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)
 misc_arg.add_argument('--resume_dir', type=str, default=None)
-misc_arg.add_argument('--train_num_workers', type=int, default=12)
+misc_arg.add_argument('--train_num_workers', type=int, default=6)
 misc_arg.add_argument('--val_num_workers', type=int, default=2)
 misc_arg.add_argument('--test_num_workers', type=int, default=2)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)
