@@ -46,12 +46,13 @@ class WeightedProcrustesTrainer:
                       'training is performed on CPU.')
       raise ValueError('GPU not available, but cuda flag set')
     if config.use_gpu:
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+        # torch.set_default_device('cuda')
     else:
         self.device = torch.device('cpu')
-    torch.set_default_device('cuda')
+
     print("GPU SETTINGS:")
-    print(torch.get_default_device())
+    print(self.device)
     self.config = config
 
     # Training config
