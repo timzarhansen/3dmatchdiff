@@ -49,6 +49,9 @@ class WeightedProcrustesTrainer:
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     else:
         self.device = torch.device('cpu')
+    torch.set_default_device('cuda')
+    print("GPU SETTINGS:")
+    print(torch.get_default_device())
     self.config = config
 
     # Training config
