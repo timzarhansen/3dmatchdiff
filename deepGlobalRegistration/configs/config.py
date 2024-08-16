@@ -28,7 +28,7 @@ trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
 
 # Batch setting
-trainer_arg.add_argument('--batch_size', type=int, default=8)
+trainer_arg.add_argument('--batch_size', type=int, default=4)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 # Data loader configs
@@ -106,8 +106,8 @@ misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFol
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)
 misc_arg.add_argument('--resume_dir', type=str, default=None)
-misc_arg.add_argument('--train_num_workers', type=int, default=10)
-misc_arg.add_argument('--val_num_workers', type=int, default=2)
+misc_arg.add_argument('--train_num_workers', type=int, default=5)
+misc_arg.add_argument('--val_num_workers', type=int, default=5)
 misc_arg.add_argument('--test_num_workers', type=int, default=2)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)
 misc_arg.add_argument('--nn_max_n', type=int, default=250, help='The maximum number of features to find nearest neighbors in batch')
@@ -137,9 +137,9 @@ demo_arg.add_argument('--pcd0', default="redkitchen_000.ply", type=str)
 demo_arg.add_argument('--pcd1', default="redkitchen_010.ply", type=str)
 # yapf: enable
 # Custom Tim Stuff
-data_arg.add_argument('--timnoise', type=str2bool, default=True)
-data_arg.add_argument('--timnoiseval', type=str2bool, default=True)
-data_arg.add_argument('--timnoisevar', type=float, default=0.02)
+data_arg.add_argument('--timnoise', type=str2bool, default=False)
+data_arg.add_argument('--timnoiseval', type=str2bool, default=False)
+data_arg.add_argument('--timnoisevar', type=float, default=0.05)
 
 def get_config():
   args = parser.parse_args()

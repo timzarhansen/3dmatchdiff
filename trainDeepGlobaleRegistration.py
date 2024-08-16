@@ -5,7 +5,6 @@
 # - Christopher Choy, Jaesik Park, Vladlen Koltun, Fully Convolutional Geometric Features, ICCV 2019
 # - Christopher Choy, JunYoung Gwak, Silvio Savarese, 4D Spatio-Temporal ConvNets: Minkowski Convolutional Neural Networks, CVPR 2019
 import open3d as o3d  # prevent loading error
-
 import sys
 import json
 import logging
@@ -56,6 +55,8 @@ def main(config, resume=False):
 
 
 if __name__ == "__main__":
+
+
   logger = logging.getLogger()
   config = get_config()
 
