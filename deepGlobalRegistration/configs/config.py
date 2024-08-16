@@ -28,7 +28,7 @@ trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
 
 # Batch setting
-trainer_arg.add_argument('--batch_size', type=int, default=16)
+trainer_arg.add_argument('--batch_size', type=int, default=8)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 # Data loader configs
@@ -138,6 +138,7 @@ demo_arg.add_argument('--pcd1', default="redkitchen_010.ply", type=str)
 # yapf: enable
 # Custom Tim Stuff
 data_arg.add_argument('--timnoise', type=str2bool, default=True)
+data_arg.add_argument('--timnoiseval', type=str2bool, default=True)
 data_arg.add_argument('--timnoisevar', type=float, default=0.02)
 
 def get_config():
