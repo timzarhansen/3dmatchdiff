@@ -28,7 +28,7 @@ trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
 
 # Batch setting
-trainer_arg.add_argument('--batch_size', type=int, default=2)
+trainer_arg.add_argument('--batch_size', type=int, default=1)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 # Data loader configs
@@ -51,7 +51,7 @@ trainer_arg.add_argument('--val_epoch_freq', type=int, default=1)
 
 trainer_arg.add_argument('--stat_freq', type=int, default=40, help='Frequency for writing stats to log')
 trainer_arg.add_argument('--test_valid', type=str2bool, default=True)
-trainer_arg.add_argument('--val_max_iter', type=int, default=20)
+trainer_arg.add_argument('--val_max_iter', type=int, default=400)
 
 
 trainer_arg.add_argument('--use_balanced_loss', type=str2bool, default=False)
@@ -92,11 +92,11 @@ opt_arg.add_argument('--sgd_dampening', type=float, default=0.1)
 opt_arg.add_argument('--adam_beta1', type=float, default=0.9)
 opt_arg.add_argument('--adam_beta2', type=float, default=0.999)
 opt_arg.add_argument('--weight_decay', type=float, default=1e-4)
-opt_arg.add_argument('--iter_size', type=int, default=1, help='accumulate gradient')
+opt_arg.add_argument('--iter_size', type=int, default=4, help='accumulate gradient')
 opt_arg.add_argument('--bn_momentum', type=float, default=0.05)
 opt_arg.add_argument('--exp_gamma', type=float, default=0.99)
 opt_arg.add_argument('--scheduler', type=str, default='ExpLR')
-opt_arg.add_argument('--num_train_iter', type=int, default=-1, help='train N iter if positive')
+opt_arg.add_argument('--num_train_iter', type=int, default=100, help='train N iter if positive')
 opt_arg.add_argument('--icp_cache_path', type=str, default="icp")
 
 # Misc
@@ -137,8 +137,8 @@ demo_arg.add_argument('--pcd0', default="redkitchen_000.ply", type=str)
 demo_arg.add_argument('--pcd1', default="redkitchen_010.ply", type=str)
 # yapf: enable
 # Custom Tim Stuff
-data_arg.add_argument('--timnoise', type=str2bool, default=False)
-data_arg.add_argument('--timnoiseval', type=str2bool, default=False)
+data_arg.add_argument('--timnoise', type=str2bool, default=True)
+data_arg.add_argument('--timnoiseval', type=str2bool, default=True)
 data_arg.add_argument('--timnoisevar', type=float, default=0.05)
 
 def get_config():

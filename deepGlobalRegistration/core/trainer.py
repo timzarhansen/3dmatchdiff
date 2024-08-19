@@ -128,6 +128,9 @@ class WeightedProcrustesTrainer:
     Major interface
     Full training logic: train, valid, and save
     """
+
+
+
     # Baseline random feature performance
     if self.test_valid:
       val_dict = self._valid_epoch()
@@ -136,7 +139,7 @@ class WeightedProcrustesTrainer:
 
     # Train and valid
     for epoch in range(self.start_epoch, self.max_epoch + 1):
-      lr = self.scheduler.get_lr()
+      lr = self.scheduler.get_last_lr()
       logging.info(f" Epoch: {epoch}, LR: {lr}")
       self._train_epoch(epoch)
       self._save_checkpoint(epoch)
@@ -291,12 +294,12 @@ class WeightedProcrustesTrainer:
           # Check gradient and avoid backprop of inf values
           max_grad = torch.abs(self.inlier_model.final.kernel.grad).max().cpu().item()
 
-        # Backprop only if gradient is finite
-        if not np.isfinite(max_grad):
-          self.optimizer.zero_grad()
-          logging.info(f'Clearing the NaN gradient at iter {curr_iter}')
-        else:
-          self.optimizer.step()
+      # Backprop only if gradient is finite
+      if not np.isfinite(max_grad):
+        self.optimizer.zero_grad()
+        logging.info(f'Clearing the NaN gradient at iter {curr_iter}')
+      else:
+        self.optimizer.step()
 
       gc.collect()
 
