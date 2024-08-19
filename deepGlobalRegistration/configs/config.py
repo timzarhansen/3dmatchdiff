@@ -96,7 +96,7 @@ opt_arg.add_argument('--iter_size', type=int, default=4, help='accumulate gradie
 opt_arg.add_argument('--bn_momentum', type=float, default=0.05)
 opt_arg.add_argument('--exp_gamma', type=float, default=0.99)
 opt_arg.add_argument('--scheduler', type=str, default='ExpLR')
-opt_arg.add_argument('--num_train_iter', type=int, default=100, help='train N iter if positive')
+opt_arg.add_argument('--num_train_iter', type=int, default=-1, help='train N iter if positive')
 opt_arg.add_argument('--icp_cache_path', type=str, default="icp")
 
 # Misc

@@ -3,10 +3,12 @@ testing different ml models vs classical methods on 3D match dataset
 
 
 # HPC stuff
-squeue
-squeue -p CHANNEL
-sbatch job.thansen
+`squeue`\
+`squeue -p CHANNEL`\
+`sbatch job.thansen`
 
-scancel <JobID>
+`scancel <JobID>`
+
+Bigger Jobs:` #SBATCH --nodelist=channel05`
 
 
