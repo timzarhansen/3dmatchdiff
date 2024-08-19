@@ -199,6 +199,11 @@ class WeightedProcrustesTrainer:
 
     # Iterate over batches
     for curr_iter in range(num_train_iter):
+      torch.cuda.memory._record_memory_history(
+          max_entries=100000
+      )
+
+
       self.optimizer.zero_grad()
 
       batch_loss, data_time = 0, 0
@@ -358,6 +363,11 @@ class WeightedProcrustesTrainer:
         total_timer.reset()
 
         tp, fp, tn, fn = 0, 0, 0, 0
+
+      try:
+          torch.cuda.memory._dump_snapshot(f"{self.config.out_dir}testMemory.pickle")
+      except Exception as e:
+          logging.error(f"Failed to capture memory snapshot {e}")
 
   def _valid_epoch(self):
     # Change the network to evaluation mode
@@ -649,6 +659,9 @@ class WeightedProcrustesTrainer:
     stime = time.time()
     pred_pairs = self.find_pairs(oF0, oF1, len_batch)
     nn_time = time.time() - stime
+    # for()
+    # oF0.to(self.device)
+    # oF1.to(self.device)
 
     is_correct = find_correct_correspondence(pos_pairs, pred_pairs, len_batch=len_batch)
 

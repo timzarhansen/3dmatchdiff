@@ -23,8 +23,10 @@ def find_knn_cpu(feat0, feat1, knn=1, return_distance=False):
 def find_knn_gpu(F0, F1, nn_max_n=-1, knn=1, return_distance=False):
 
   def knn_dist(f0, f1, knn=1, dist_type='L2'):
+
     knn_dists, knn_inds = [], []
     with torch.no_grad():
+
       dist = pdist(f0, f1, dist_type=dist_type)
       min_dist, ind = dist.min(dim=1, keepdim=True)
 
@@ -173,4 +175,5 @@ def find_knn_cpu_batch(F0,
   if return_distance:
     return torch.from_numpy(nns), torch.from_numpy(dists)
   else:
-    return torch.from_numpy(nns)
+    return [torch.from_numpy(item.reshape(-1,1)).float() for item in nns]
+    # return torch.from_numpy(nns)
