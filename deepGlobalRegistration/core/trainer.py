@@ -199,9 +199,9 @@ class WeightedProcrustesTrainer:
 
     # Iterate over batches
     for curr_iter in range(num_train_iter):
-      torch.cuda.memory._record_memory_history(
-          max_entries=100000
-      )
+      # torch.cuda.memory._record_memory_history(
+      #     max_entries=100000
+      # )
 
 
       self.optimizer.zero_grad()
@@ -364,10 +364,10 @@ class WeightedProcrustesTrainer:
 
         tp, fp, tn, fn = 0, 0, 0, 0
 
-      try:
-          torch.cuda.memory._dump_snapshot(f"{self.config.out_dir}testMemory.pickle")
-      except Exception as e:
-          logging.error(f"Failed to capture memory snapshot {e}")
+      # try:
+      #     torch.cuda.memory._dump_snapshot(f"{self.config.out_dir}/testMemory.pickle")
+      # except Exception as e:
+      #     logging.error(f"Failed to capture memory snapshot {e}")
 
   def _valid_epoch(self):
     # Change the network to evaluation mode

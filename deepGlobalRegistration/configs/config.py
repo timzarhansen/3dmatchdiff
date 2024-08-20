@@ -92,7 +92,7 @@ opt_arg.add_argument('--sgd_dampening', type=float, default=0.1)
 opt_arg.add_argument('--adam_beta1', type=float, default=0.9)
 opt_arg.add_argument('--adam_beta2', type=float, default=0.999)
 opt_arg.add_argument('--weight_decay', type=float, default=1e-4)
-opt_arg.add_argument('--iter_size', type=int, default=4, help='accumulate gradient')
+opt_arg.add_argument('--iter_size', type=int, default=8, help='accumulate gradient')
 opt_arg.add_argument('--bn_momentum', type=float, default=0.05)
 opt_arg.add_argument('--exp_gamma', type=float, default=0.99)
 opt_arg.add_argument('--scheduler', type=str, default='ExpLR')
@@ -139,7 +139,7 @@ demo_arg.add_argument('--pcd1', default="redkitchen_010.ply", type=str)
 # Custom Tim Stuff
 data_arg.add_argument('--timnoise', type=str2bool, default=True)
 data_arg.add_argument('--timnoiseval', type=str2bool, default=True)
-data_arg.add_argument('--timnoisevar', type=float, default=0.05)
+data_arg.add_argument('--timnoisevar', type=float, default=0.001)
 
 def get_config():
   args = parser.parse_args()
