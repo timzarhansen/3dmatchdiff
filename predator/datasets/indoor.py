@@ -68,8 +68,10 @@ class IndoorDataset(Dataset):
                 rot = np.matmul(rot_ab, rot)
                 trans = np.matmul(rot_ab, trans)
 
-            src_pcd += (np.random.rand(src_pcd.shape[0], 3) - 0.5) * self.augment_noise
-            tgt_pcd += (np.random.rand(tgt_pcd.shape[0], 3) - 0.5) * self.augment_noise
+            # src_pcd += (np.random.rand(src_pcd.shape[0], 3) - 0.5) * self.augment_noise
+            # tgt_pcd += (np.random.rand(tgt_pcd.shape[0], 3) - 0.5) * self.augment_noise
+            src_pcd += (np.random.normal(0,self.augment_noise,src_pcd.shape))
+            tgt_pcd += (np.random.normal(0,self.augment_noise,tgt_pcd.shape))
 
         if (trans.ndim == 1):
             trans = trans[:, None]

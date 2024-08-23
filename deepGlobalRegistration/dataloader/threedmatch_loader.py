@@ -64,21 +64,23 @@ class IndoorPairDataset(PairDataset):
     xyz1 = data1["pcd"]
 
 
-    # pcd1 = o3d.geometry.PointCloud()
-    # pcd1.points = o3d.utility.Vector3dVector(xyz0)
-    # o3d.visualization.draw_geometries([pcd1])
+    pcd1 = o3d.geometry.PointCloud()
+    pcd1.points = o3d.utility.Vector3dVector(xyz0)
+    o3d.visualization.draw_geometries([pcd1])
 
     if self.noise:
-      for it in range(np.shape(xyz0)[0]):
-        xyz0[it,:] = xyz0[it,:]+np.random.normal(0, self.noisevar, size=xyz0[it,:].shape)
-      for it in range(np.shape(xyz1)[0]):
-        xyz1[it,:] = xyz1[it,:]+np.random.normal(0, self.noisevar, size=xyz1[it,:].shape)
+      xyz0 += (np.random.normal(0,self.noisevar,xyz0.shape))
+      xyz1 += (np.random.normal(0,self.noisevar,xyz1.shape))
+      # for it in range(np.shape(xyz0)[0]):
+      #   xyz0[it,:] = xyz0[it,:]+np.random.normal(0, self.noisevar, size=xyz0[it,:].shape)
+      # for it in range(np.shape(xyz1)[0]):
+      #   xyz1[it,:] = xyz1[it,:]+np.random.normal(0, self.noisevar, size=xyz1[it,:].shape)
 
 
 
-    # pcd1 = o3d.geometry.PointCloud()
-    # pcd1.points = o3d.utility.Vector3dVector(xyz0)
-    # o3d.visualization.draw_geometries([pcd1])
+    pcd1 = o3d.geometry.PointCloud()
+    pcd1.points = o3d.utility.Vector3dVector(xyz0)
+    o3d.visualization.draw_geometries([pcd1])
 
 
     # pcd1 = o3d.geometry.PointCloud()

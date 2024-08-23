@@ -165,7 +165,9 @@ class Trainer(object):
     def inference_one_epoch(self, epoch, phase):
         gc.collect()
         assert phase in ['train', 'val', 'test']
-
+        # torch.cuda.memory._record_memory_history(
+        #     max_entries=100000
+        # )
         # init stats meter
         stats_meter = self.stats_meter()
 
@@ -219,6 +221,10 @@ class Trainer(object):
                     message += f'{key}: {value.avg:.2f}\t'
 
                 self.logger.write(message + '\n')
+            # try:
+            #     torch.cuda.memory._dump_snapshot(f"{self.config.tboard_dir}/testMemory.pickle")
+            # except Exception as e:
+            #     self.logger.error(f"Failed to capture memory snapshot {e}")
 
         message = f'{phase} Epoch: {epoch}'
         for key, value in stats_meter.items():
