@@ -64,9 +64,9 @@ class IndoorPairDataset(PairDataset):
     xyz1 = data1["pcd"]
 
 
-    pcd1 = o3d.geometry.PointCloud()
-    pcd1.points = o3d.utility.Vector3dVector(xyz0)
-    o3d.visualization.draw_geometries([pcd1])
+    # pcd1 = o3d.geometry.PointCloud()
+    # pcd1.points = o3d.utility.Vector3dVector(xyz0)
+    # o3d.visualization.draw_geometries([pcd1])
 
     if self.noise:
       xyz0 += (np.random.normal(0,self.noisevar,xyz0.shape))
@@ -78,9 +78,9 @@ class IndoorPairDataset(PairDataset):
 
 
 
-    pcd1 = o3d.geometry.PointCloud()
-    pcd1.points = o3d.utility.Vector3dVector(xyz0)
-    o3d.visualization.draw_geometries([pcd1])
+    # pcd1 = o3d.geometry.PointCloud()
+    # pcd1.points = o3d.utility.Vector3dVector(xyz0)
+    # o3d.visualization.draw_geometries([pcd1])
 
 
     # pcd1 = o3d.geometry.PointCloud()
