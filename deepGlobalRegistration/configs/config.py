@@ -137,8 +137,8 @@ demo_arg.add_argument('--pcd0', default="redkitchen_000.ply", type=str)
 demo_arg.add_argument('--pcd1', default="redkitchen_010.ply", type=str)
 # yapf: enable
 # Custom Tim Stuff
-data_arg.add_argument('--timnoise', type=str2bool, default=True)
-data_arg.add_argument('--timnoiseval', type=str2bool, default=True)
+data_arg.add_argument('--timnoise', type=str2bool, default=False)
+data_arg.add_argument('--timnoiseval', type=str2bool, default=False)
 data_arg.add_argument('--timnoisevar', type=float, default=0.01)
 
 def get_config():
