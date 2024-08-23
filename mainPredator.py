@@ -21,7 +21,7 @@ if __name__ == '__main__':
     config = load_config(args.config)
     config['snapshot_dir'] = '%s' % config['exp_dir']
     config['tboard_dir'] = '%s/tensorboard' % config['exp_dir']
-    config['save_dir'] = '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/%s/checkpoints' % config['exp_dir']
+    config['save_dir'] = '%s/checkpoints' % config['exp_dir']
     config = edict(config)
 
     os.makedirs(config.snapshot_dir, exist_ok=True)
