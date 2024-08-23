@@ -19,8 +19,8 @@ if __name__ == '__main__':
     parser.add_argument('config', type=str, help= 'Path to the config file.')
     args = parser.parse_args()
     config = load_config(args.config)
-    config['snapshot_dir'] = '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/%s' % config['exp_dir']
-    config['tboard_dir'] = '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/%s/tensorboard' % config['exp_dir']
+    config['snapshot_dir'] = '%s' % config['exp_dir']
+    config['tboard_dir'] = '%s/tensorboard' % config['exp_dir']
     config['save_dir'] = '/home/tim-external/dataFolder/3dmatch/models/predator/snapshot/%s/checkpoints' % config['exp_dir']
     config = edict(config)
 

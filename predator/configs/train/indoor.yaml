@@ -1,5 +1,6 @@
 misc:
-  exp_dir: indoor
+#  exp_dir: /home/thansen/tensorboard/3dmatch/models/predator
+  exp_dir: /home/tim-external/dataFolder/3dmatch/models/predator/snapshot
   mode: train
   gpu_mode: True
   verbose: True
@@ -17,16 +18,16 @@ model:
   first_subsampling_dl: 0.025
   in_feats_dim: 1
   conv_radius: 2.5
-  deform_radius: 5.0 
+  deform_radius: 5.0
   num_kernel_points: 15
   KP_extent: 2.0
   KP_influence: linear
-  aggregation_mode: sum 
+  aggregation_mode: sum
   fixed_kernel_points: center
-  use_batch_norm: True 
+  use_batch_norm: True
   batch_norm_momentum: 0.02
   deformable: False
-  modulated: False 
+  modulated: False
   add_cross_score: True
   condition_feature: True
 
@@ -43,7 +44,7 @@ loss:
   pos_radius: 0.0375
   safe_radius: 0.1
   overlap_radius: 0.0375
-  matchability_radius: 0.05 
+  matchability_radius: 0.05
   w_circle_loss: 1.0
   w_overlap_loss: 1.0
   w_saliency_loss: 0.0
@@ -63,9 +64,11 @@ optimiser:
 dataset:
   dataset: indoor
   benchmark: 3DMatch
+#  root: /home/thansen/dataFolder/predatorData/data/indoor
   root: /home/tim-external/dataFolder/3dmatch/models/predator/data/indoor
   batch_size: 1
-  num_workers: 6
+  num_workers: 10
+  addedNoise: True
   augment_noise: 0.01
   train_info: predator/configs/indoor/train_info.pkl
   val_info: predator/configs/indoor/val_info.pkl

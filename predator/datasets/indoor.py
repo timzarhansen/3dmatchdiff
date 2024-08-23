@@ -27,6 +27,7 @@ class IndoorDataset(Dataset):
         self.base_dir = config.root
         self.overlap_radius = config.overlap_radius
         self.data_augmentation = data_augmentation
+        self.addedNoise = config.addedNoise
         self.config = config
 
         self.rot_factor = 1.
@@ -70,6 +71,8 @@ class IndoorDataset(Dataset):
 
             # src_pcd += (np.random.rand(src_pcd.shape[0], 3) - 0.5) * self.augment_noise
             # tgt_pcd += (np.random.rand(tgt_pcd.shape[0], 3) - 0.5) * self.augment_noise
+
+        if self.addedNoise:
             src_pcd += (np.random.normal(0,self.augment_noise,src_pcd.shape))
             tgt_pcd += (np.random.normal(0,self.augment_noise,tgt_pcd.shape))
 
