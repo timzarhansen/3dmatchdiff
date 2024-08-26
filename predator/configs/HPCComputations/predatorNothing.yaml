@@ -1,6 +1,6 @@
 misc:
-#  exp_dir: /home/thansen/tensorboard/3dmatch/models/predator/exp1
-  exp_dir: /home/tim-external/dataFolder/3dmatch/models/predator/test
+  exp_dir: /home/thansen/tensorboard/3dmatch/models/predator/exp1
+#  exp_dir: /home/tim-external/dataFolder/3dmatch/models/predator/test
   mode: train
   gpu_mode: True
   verbose: True
@@ -64,8 +64,8 @@ optimiser:
 dataset:
   dataset: indoor
   benchmark: 3DMatch
-#  root: /home/thansen/dataFolder/predatorData/data/indoor
-  root: /home/tim-external/dataFolder/3dmatch/models/predator/data/indoor
+  root: /home/thansen/dataFolder/predatorData/data/indoor
+#  root: /home/tim-external/dataFolder/3dmatch/models/predator/data/indoor
   batch_size: 1
   num_workers: 10
   addedNoiseVal: False
