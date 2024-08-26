@@ -1,6 +1,6 @@
 misc:
-  exp_dir: /home/thansen/tensorboard/3dmatch/models/predator
-  #exp_dir: /home/tim-external/dataFolder/3dmatch/models/predator/snapshot
+  exp_dir: /home/thansen/tensorboard/3dmatch/models/predator/exp6
+#  exp_dir: /home/tim-external/dataFolder/3dmatch/models/predator/snapshot
   mode: train
   gpu_mode: True
   verbose: True
@@ -13,7 +13,7 @@ misc:
 model:
   num_layers: 4
   in_points_dim: 3
-  first_feats_dim: 128
+  first_feats_dim: 64
   final_feats_dim: 32
   first_subsampling_dl: 0.025
   in_feats_dim: 1
@@ -65,11 +65,12 @@ dataset:
   dataset: indoor
   benchmark: 3DMatch
   root: /home/thansen/dataFolder/predatorData/data/indoor
-  #root: /home/tim-external/dataFolder/3dmatch/models/predator/data/indoor
+#  root: /home/tim-external/dataFolder/3dmatch/models/predator/data/indoor
   batch_size: 1
   num_workers: 10
-  addedNoise: True
-  augment_noise: 0.01
+  addedNoiseVal: False
+  addedNoiseTrain: True
+  augment_noise: 0.05
   train_info: predator/configs/indoor/train_info.pkl
   val_info: predator/configs/indoor/val_info.pkl
 

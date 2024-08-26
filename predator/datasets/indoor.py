@@ -21,13 +21,13 @@ class IndoorDataset(Dataset):
         trans:          [3,1]
     """
 
-    def __init__(self, infos, config, data_augmentation=True):
+    def __init__(self, infos, config, data_augmentation=True,added_noise=False):
         super(IndoorDataset, self).__init__()
         self.infos = infos
         self.base_dir = config.root
         self.overlap_radius = config.overlap_radius
         self.data_augmentation = data_augmentation
-        self.addedNoise = config.addedNoise
+        self.addedNoise = added_noise
         self.config = config
 
         self.rot_factor = 1.
