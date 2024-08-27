@@ -1,4 +1,4 @@
-job3.thansen#!/bin/bash
+#!/bin/bash
 
 #SBATCH --job-name="Robotics ML"      ## Job Name
 #SBATCH --mail-type=ALL               ## Define when to send emails
