@@ -16,7 +16,7 @@ RUN git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
 RUN cd MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
 RUN cd /workspace
 RUN git clone https://github.com/timzarhansen/3dmatchdiff.git
-RUN cd 3dmatchdiff
+RUN cd /workspace/3dmatchdiff/
 RUN pip install -r requirements.txt
 
 RUN bash deepGlobalRegistration/scripts/download_3dmatch.sh /workspace/data
