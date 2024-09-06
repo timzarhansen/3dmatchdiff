@@ -28,7 +28,7 @@ trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
 
 # Batch setting
-trainer_arg.add_argument('--batch_size', type=int, default=1)
+trainer_arg.add_argument('--batch_size', type=int, default=16)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 # Data loader configs
@@ -92,7 +92,7 @@ opt_arg.add_argument('--sgd_dampening', type=float, default=0.1)
 opt_arg.add_argument('--adam_beta1', type=float, default=0.9)
 opt_arg.add_argument('--adam_beta2', type=float, default=0.999)
 opt_arg.add_argument('--weight_decay', type=float, default=1e-4)
-opt_arg.add_argument('--iter_size', type=int, default=16, help='accumulate gradient')
+opt_arg.add_argument('--iter_size', type=int, default=1, help='accumulate gradient')
 opt_arg.add_argument('--bn_momentum', type=float, default=0.05)
 opt_arg.add_argument('--exp_gamma', type=float, default=0.99)
 opt_arg.add_argument('--scheduler', type=str, default='ExpLR')
@@ -106,7 +106,7 @@ misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFol
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)
 misc_arg.add_argument('--resume_dir', type=str, default=None)
-misc_arg.add_argument('--train_num_workers', type=int, default=1)
+misc_arg.add_argument('--train_num_workers', type=int, default=10)
 misc_arg.add_argument('--val_num_workers', type=int, default=5)
 misc_arg.add_argument('--test_num_workers', type=int, default=2)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)

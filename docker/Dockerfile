@@ -1,0 +1,21 @@
+FROM pytorch/pytorch:2.4.1-cuda11.8-cudnn9-devel
+
+ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 6.2 7.0 7.2 7.5 8.0 8.6 8.9"
+ENV TORCH_NVCC_FLAGS="-Xfatbin -compress-all"
+
+
+RUN apt-get update
+RUN apt-get install -y git ninja-build cmake build-essential libopenblas-dev \
+    xterm xauth openssh-server tmux wget mate-desktop-environment-core
+
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
+
+ENV MAX_JOBS=4
+RUN git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
+RUN cd MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
+RUN cd /workspace
+RUN git clone https://github.com/timzarhansen/3dmatchdiff.git
+RUN cd 3dmatchdiff
+RUN pip install -r requirements.txt
+RUN #conda install --yes --file requirements.txt

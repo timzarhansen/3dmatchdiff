@@ -265,7 +265,7 @@ class WeightedProcrustesTrainer:
         loss = self.config.procrustes_loss_weight * individual_loss[valid_mask].mean()
         if not np.isfinite(loss.item()):
           max_val = loss.item()
-          logging.info('Loss is infinite, abort '+str(curr_iter))
+          logging.info('Loss is infinite, abort '+str(curr_iter)+' '+str(iter_idx))
           continue
 
         # Direct inlier loss against nearest neighbor searched GT
@@ -278,24 +278,25 @@ class WeightedProcrustesTrainer:
         loss.backward()
 
         # Update statistics before backprop
-        with torch.no_grad():
-          regist_rre_meter.update(rot_error.squeeze() * 180 / np.pi)
-          regist_rte_meter.update(trans_error.squeeze())
+      with torch.no_grad():
+        regist_rre_meter.update(rot_error.squeeze() * 180 / np.pi)
+        regist_rte_meter.update(trans_error.squeeze())
 
-          success = (trans_error.squeeze() < self.config.success_rte_thresh) * (
-              rot_error.squeeze() * 180 / np.pi < self.config.success_rre_thresh)
-          regist_succ_meter.update(success.float())
+        success = (trans_error.squeeze() < self.config.success_rte_thresh) * (
+            rot_error.squeeze() * 180 / np.pi < self.config.success_rre_thresh)
+        regist_succ_meter.update(success.float())
 
-          batch_loss += loss.mean().item()
+        batch_loss += loss.mean().item()
 
-          neg_target = (~target).to(torch.bool)
-          pred = logits > 0  # todo thresh
-          pred_on_pos, pred_on_neg = pred[target], pred[neg_target]
-          tp += pred_on_pos.sum().item()
-          fp += pred_on_neg.sum().item()
-          tn += (~pred_on_neg).sum().item()
-          fn += (~pred_on_pos).sum().item()
+        neg_target = (~target).to(torch.bool)
+        pred = logits > 0  # todo thresh
+        pred_on_pos, pred_on_neg = pred[target], pred[neg_target]
+        tp += pred_on_pos.sum().item()
+        fp += pred_on_neg.sum().item()
+        tn += (~pred_on_neg).sum().item()
+        fn += (~pred_on_pos).sum().item()
 
+      with torch.no_grad():
           # Check gradient and avoid backprop of inf values
           max_grad = torch.abs(self.inlier_model.final.kernel.grad).max().cpu().item()
 
