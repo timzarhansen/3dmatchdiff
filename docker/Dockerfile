@@ -6,7 +6,7 @@ ENV TORCH_NVCC_FLAGS="-Xfatbin -compress-all"
 
 RUN apt-get update
 RUN apt-get install -y git ninja-build cmake build-essential libopenblas-dev \
-    xterm xauth openssh-server tmux wget mate-desktop-environment-core
+    xterm xauth openssh-server tmux wget mate-desktop-environment-core vim nano
 
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
@@ -18,4 +18,14 @@ RUN cd /workspace
 RUN git clone https://github.com/timzarhansen/3dmatchdiff.git
 RUN cd 3dmatchdiff
 RUN pip install -r requirements.txt
+
+RUN bash deepGlobalRegistration/scripts/download_3dmatch.sh /workspace/data
+RUN wget https://node1.chrischoy.org/data/publications/fcgf/2019-08-16_19-21-47.pth -P /workspace/data/FCGF/
+
+
 RUN #conda install --yes --file requirements.txt
+
+
+#python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/data/results/test1'
+
+#--threed_match_dir '/workspace/data/threedmatch' --weights '/workspace/data/FCGF/2019-08-16_19-21-47.pth'
