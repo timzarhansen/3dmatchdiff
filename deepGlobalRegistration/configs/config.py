@@ -101,7 +101,7 @@ opt_arg.add_argument('--icp_cache_path', type=str, default="icp")
 
 # Misc
 misc_arg = add_argument_group('Misc')
-misc_arg.add_argument('--use_gpu', type=str2bool, default=True)
+misc_arg.add_argument('--use_gpu', type=str2bool, default=False)
 misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFolder/3dmatch/models/deepGlobalRegistration/dlModels/2019-08-16_19-21-47.pth')
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)

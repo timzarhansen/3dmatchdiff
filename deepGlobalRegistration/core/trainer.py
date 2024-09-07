@@ -511,7 +511,8 @@ class WeightedProcrustesTrainer:
   def _load_weights(self, config):
     if config.resume is None and config.weights:
       logging.info("=> loading weights for inlier model '{}'".format(config.weights))
-      checkpoint = torch.load(config.weights)
+      # if
+      checkpoint = torch.load(config.weights,map_location=self.device)
       self.feat_model.load_state_dict(checkpoint['state_dict'])
       logging.info("=> Loaded base model weights from '{}'".format(config.weights))
       if 'state_dict_inlier' in checkpoint:

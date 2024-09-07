@@ -15,17 +15,18 @@ ENV MAX_JOBS=4
 RUN git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
 RUN cd MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
 RUN cd /workspace
+#this line is only for not caching anything
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN git clone https://github.com/timzarhansen/3dmatchdiff.git
 RUN cd /workspace/3dmatchdiff/
-RUN pip install -r requirements.txt
+RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 
-RUN bash deepGlobalRegistration/scripts/download_3dmatch.sh /workspace/data
+RUN bash /workspace/3dmatchdiff/deepGlobalRegistration/scripts/download_3dmatch.sh /workspace/data
 RUN wget https://node1.chrischoy.org/data/publications/fcgf/2019-08-16_19-21-47.pth -P /workspace/data/FCGF/
 
 
 RUN #conda install --yes --file requirements.txt
 
 
-#python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/data/results/test1'
+#python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/data/results/test1' --threed_match_dir '/workspace/data/threedmatch' --weights '/workspace/data/FCGF/2019-08-16_19-21-47.pth' --use_gpu false
 
-#--threed_match_dir '/workspace/data/threedmatch' --weights '/workspace/data/FCGF/2019-08-16_19-21-47.pth'
