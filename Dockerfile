@@ -23,7 +23,7 @@ RUN cd /workspace
 #this line is only for not caching anything
 
 RUN git clone https://github.com/timzarhansen/3dmatchdiff.git
-#ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN cd /workspace/3dmatchdiff/ && git pull
 RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 
