@@ -106,7 +106,7 @@ misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFol
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)
 misc_arg.add_argument('--resume_dir', type=str, default=None)
-misc_arg.add_argument('--train_num_workers', type=int, default=10)
+misc_arg.add_argument('--train_num_workers', type=int, default=0)# was 10
 misc_arg.add_argument('--val_num_workers', type=int, default=5)
 misc_arg.add_argument('--test_num_workers', type=int, default=2)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)

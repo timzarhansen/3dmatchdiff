@@ -83,6 +83,7 @@ def compute_overlap_ratio(pcd0, pcd1, trans, voxel_size):
 def get_matching_indices(source, target, trans, search_voxel_size, K=None):
   source_copy = copy.deepcopy(source)
   target_copy = copy.deepcopy(target)
+  # source.transform(trans)
   source_copy.transform(trans)
   pcd_tree = o3d.geometry.KDTreeFlann(target_copy)
 
