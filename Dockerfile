@@ -1,5 +1,5 @@
-FROM pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
-
+#FROM pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
+FROM 763104351884.dkr.ecr.eu-central-1.amazonaws.com/pytorch-inference:2.2.0-gpu-py310-cu118-ubuntu20.04-ec2
 ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 6.2 7.0 7.2 7.5 8.0 8.6 8.9"
 ENV TORCH_NVCC_FLAGS="-Xfatbin -compress-all"
 
@@ -13,19 +13,32 @@ RUN apt-get update && apt-get install --no-install-recommends -y libegl1 libgl1 
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
-ENV MAX_JOBS=2
-RUN git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
-RUN cd MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
-RUN cd /workspace
+
+RUN mkdir /workspace
+
+ENV MAX_JOBS=8
+RUN cd /workspace && git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
+RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
+
 
 
 
 #this line is only for not caching anything
-
-RUN git clone https://github.com/timzarhansen/3dmatchdiff.git
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+RUN alias nano='LD_LIBRARY_PATH="" command nano'
+RUN cd /workspace && git clone https://github.com/timzarhansen/3dmatchdiff.git
+#ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN cd /workspace/3dmatchdiff/ && git pull
 RUN pip install -r /workspace/3dmatchdiff/requirements.txt
+RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
+ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
+
+
+
+
+
+############################################# stuff for development
+# docker run --name test -d -v /home/tim-external/dataFolder/3dmatch:/workspace/3dmatch aws_test:latest
+
 
 
 
@@ -35,7 +48,7 @@ RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 ##cd /opt/directory/
 #
 #
-#RUN #conda install --yes --file requirements.txt
+#RUN #conda install --yes --file requirements.txt 2
 
 
 #python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/data/results/test1' --threed_match_dir '/workspace/data/threedmatch' --weights '/workspace/data/FCGF/2019-08-16_19-21-47.pth' --use_gpu false
