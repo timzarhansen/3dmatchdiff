@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y libegl1 libgl1 
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
-ENV MAX_JOBS=4
+ENV MAX_JOBS=2
 RUN git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
 RUN cd MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
 RUN cd /workspace
