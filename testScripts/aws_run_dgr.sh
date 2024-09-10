@@ -1,4 +1,8 @@
 #! /bin/bash
 
 
-echo hello2
+
+
+
+cd /workspace/3dmatchdiff/ && bash testScripts/runningJobsDGR.sh
+
