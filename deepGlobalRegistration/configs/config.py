@@ -49,7 +49,7 @@ trainer_arg.add_argument(
 trainer_arg.add_argument('--save_epoch_freq', type=int, default=1)
 trainer_arg.add_argument('--val_epoch_freq', type=int, default=1)
 
-trainer_arg.add_argument('--stat_freq', type=int, default=10, help='Frequency for writing stats to log')
+trainer_arg.add_argument('--stat_freq', type=int, default=100, help='Frequency for writing stats to log')
 trainer_arg.add_argument('--test_valid', type=str2bool, default=True)
 trainer_arg.add_argument('--val_max_iter', type=int, default=400)
 
