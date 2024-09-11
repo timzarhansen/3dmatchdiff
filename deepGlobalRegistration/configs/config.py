@@ -28,7 +28,7 @@ trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
 
 # Batch setting
-trainer_arg.add_argument('--batch_size', type=int, default=16)
+trainer_arg.add_argument('--batch_size', type=int, default=4)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 # Data loader configs
@@ -110,7 +110,7 @@ misc_arg.add_argument('--train_num_workers', type=int, default=2)# was 10
 misc_arg.add_argument('--val_num_workers', type=int, default=2)
 misc_arg.add_argument('--test_num_workers', type=int, default=1)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)
-misc_arg.add_argument('--nn_max_n', type=int, default=100, help='The maximum number of features to find nearest neighbors in batch')#was 250
+misc_arg.add_argument('--nn_max_n', type=int, default=250, help='The maximum number of features to find nearest neighbors in batch')#was 250
 
 # Dataset specific configurations
 data_arg = add_argument_group('Data')
