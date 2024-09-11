@@ -26,6 +26,8 @@ RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=o
 #this line is only for not caching anything
 
 RUN cd /workspace && git clone https://github.com/timzarhansen/3dmatchdiff.git
+
+
 ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN cd /workspace/3dmatchdiff/ && git pull
 RUN pip install -r /workspace/3dmatchdiff/requirements.txt
@@ -37,7 +39,7 @@ ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
 
 
 ############################################# stuff for development
-# docker run --name test -d -v /home/tim-external/dataFolder/3dmatch:/workspace/3dmatch aws_test:latest
+# docker run --ipc=host -d --name test -v /home/tim-external/dataFolder/3dmatch:/workspace/3dmatch aws_test:latest
 
 #alias nano='LD_LIBRARY_PATH="" command nano'
 

@@ -96,7 +96,7 @@ opt_arg.add_argument('--iter_size', type=int, default=1, help='accumulate gradie
 opt_arg.add_argument('--bn_momentum', type=float, default=0.05)
 opt_arg.add_argument('--exp_gamma', type=float, default=0.99)
 opt_arg.add_argument('--scheduler', type=str, default='ExpLR')
-opt_arg.add_argument('--num_train_iter', type=int, default=100, help='train N iter if positive')# normally -1
+opt_arg.add_argument('--num_train_iter', type=int, default=-1, help='train N iter if positive')# normally -1
 opt_arg.add_argument('--icp_cache_path', type=str, default="icp")
 
 # Misc
@@ -106,11 +106,11 @@ misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFol
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)
 misc_arg.add_argument('--resume_dir', type=str, default=None)
-misc_arg.add_argument('--train_num_workers', type=int, default=1)# was 10
-misc_arg.add_argument('--val_num_workers', type=int, default=1)
+misc_arg.add_argument('--train_num_workers', type=int, default=4)# was 10
+misc_arg.add_argument('--val_num_workers', type=int, default=4)
 misc_arg.add_argument('--test_num_workers', type=int, default=1)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)
-misc_arg.add_argument('--nn_max_n', type=int, default=100, help='The maximum number of features to find nearest neighbors in batch')#was 250
+misc_arg.add_argument('--nn_max_n', type=int, default=250, help='The maximum number of features to find nearest neighbors in batch')#was 250
 
 # Dataset specific configurations
 data_arg = add_argument_group('Data')
