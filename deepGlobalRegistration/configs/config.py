@@ -110,7 +110,7 @@ misc_arg.add_argument('--train_num_workers', type=int, default=2)# was 10
 misc_arg.add_argument('--val_num_workers', type=int, default=2)
 misc_arg.add_argument('--test_num_workers', type=int, default=1)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)
-misc_arg.add_argument('--nn_max_n', type=int, default=250, help='The maximum number of features to find nearest neighbors in batch')#was 250
+misc_arg.add_argument('--nn_max_n', type=int, default=500, help='The maximum number of features to find nearest neighbors in batch')#was 250
 
 # Dataset specific configurations
 data_arg = add_argument_group('Data')
