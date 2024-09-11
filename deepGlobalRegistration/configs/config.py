@@ -49,7 +49,7 @@ trainer_arg.add_argument(
 trainer_arg.add_argument('--save_epoch_freq', type=int, default=1)
 trainer_arg.add_argument('--val_epoch_freq', type=int, default=1)
 
-trainer_arg.add_argument('--stat_freq', type=int, default=40, help='Frequency for writing stats to log')
+trainer_arg.add_argument('--stat_freq', type=int, default=10, help='Frequency for writing stats to log')
 trainer_arg.add_argument('--test_valid', type=str2bool, default=True)
 trainer_arg.add_argument('--val_max_iter', type=int, default=400)
 
@@ -96,7 +96,7 @@ opt_arg.add_argument('--iter_size', type=int, default=1, help='accumulate gradie
 opt_arg.add_argument('--bn_momentum', type=float, default=0.05)
 opt_arg.add_argument('--exp_gamma', type=float, default=0.99)
 opt_arg.add_argument('--scheduler', type=str, default='ExpLR')
-opt_arg.add_argument('--num_train_iter', type=int, default=-1, help='train N iter if positive')
+opt_arg.add_argument('--num_train_iter', type=int, default=100, help='train N iter if positive')# normally -1
 opt_arg.add_argument('--icp_cache_path', type=str, default="icp")
 
 # Misc
