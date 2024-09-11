@@ -30,7 +30,7 @@ ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN cd /workspace/3dmatchdiff/ && git pull
 RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
-#ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
+ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
 
 
 
