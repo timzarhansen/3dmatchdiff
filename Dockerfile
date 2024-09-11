@@ -24,7 +24,7 @@ RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=o
 
 
 #this line is only for not caching anything
-
+#COPY . /workspace
 RUN cd /workspace && git clone https://github.com/timzarhansen/3dmatchdiff.git
 
 
