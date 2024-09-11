@@ -11,28 +11,28 @@ nn_max_n=500
 
 #python mainPredator.py predator/configs/train/indoor.yaml
 export OMP_NUM_THREADS=4;
-python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/output/deepGlobalRegistration/10' \
+python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/3dmatch/output/deepGlobalRegistration/10' \
 --max_epoch $numberofepochs \
 --test_valid $validation \
 --threed_match_dir $datasetdir \
 --weights $weights
 
 sleep $sleeptimebetweenruns
-python trainDeepGlobaleRegistration.py --timnoise false --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/output/deepGlobalRegistration/11' \
+python trainDeepGlobaleRegistration.py --timnoise false --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/3dmatch/output/deepGlobalRegistration/11' \
 --max_epoch $numberofepochs \
 --test_valid $validation \
 --threed_match_dir $datasetdir \
 --weights $weights
 
 sleep $sleeptimebetweenruns
-python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval false --timnoisevar 0.05 --out_dir '/workspace/output/deepGlobalRegistration/12' \
+python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval false --timnoisevar 0.05 --out_dir '/workspace/3dmatch/deepGlobalRegistration/12' \
 --max_epoch $numberofepochs \
 --test_valid $validation \
 --threed_match_dir $datasetdir \
 --weights $weights
 
 sleep $sleeptimebetweenruns
-python trainDeepGlobaleRegistration.py --timnoise false --timnoiseval false --timnoisevar 0.05 --out_dir '/workspace/output/deepGlobalRegistration/13' \
+python trainDeepGlobaleRegistration.py --timnoise false --timnoiseval false --timnoisevar 0.05 --out_dir '/workspace/3dmatch/deepGlobalRegistration/13' \
 --max_epoch $numberofepochs \
 --test_valid $validation \
 --threed_match_dir $datasetdir \
