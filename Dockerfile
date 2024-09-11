@@ -39,7 +39,7 @@ ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
 
 
 ############################################# stuff for development
-# docker run --ipc=host -d --gpus all --name test -v /home/tim-external/dataFolder/3dmatch:/workspace/3dmatch aws_test:latest
+# docker run --ipc=host --gpus all --name test -v /home/ubuntu/3dmatch:/workspace/3dmatch aws_test:latest
 
 #alias nano='LD_LIBRARY_PATH="" command nano'
 
