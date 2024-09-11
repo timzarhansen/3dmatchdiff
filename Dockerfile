@@ -16,7 +16,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /workspace
 
-ENV MAX_JOBS=8
+ENV MAX_JOBS=4
 RUN cd /workspace && git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
 RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
 
@@ -39,7 +39,7 @@ ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
 
 
 ############################################# stuff for development
-# docker run --ipc=host -d --name test -v /home/tim-external/dataFolder/3dmatch:/workspace/3dmatch aws_test:latest
+# docker run --ipc=host -d --gpus all --name test -v /home/tim-external/dataFolder/3dmatch:/workspace/3dmatch aws_test:latest
 
 #alias nano='LD_LIBRARY_PATH="" command nano'
 
