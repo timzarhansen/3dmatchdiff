@@ -31,7 +31,7 @@
 //    }
 //  ],
   "mounts": [
-    "source=/home/tim-external/dataFolder/3dmatch,target=/home/tim-external/dataFolder/3dmatch,type=bind,consistency=cached"
+    "source=/home/tim-external/dataFolder/3dmatch,target=/workspace/3dmatch,type=bind,consistency=cached"
   ]
 
   // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
