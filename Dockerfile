@@ -16,7 +16,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /workspace
 
-ENV MAX_JOBS=4
+ENV MAX_JOBS=8
 RUN cd /workspace && git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
 RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
 
@@ -24,22 +24,22 @@ RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=o
 
 
 #this line is only for not caching anything
-#COPY . /workspace
-RUN cd /workspace && git clone https://github.com/timzarhansen/3dmatchdiff.git
 
-
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
-RUN cd /workspace/3dmatchdiff/ && git pull
+COPY requirements.txt /workspace/3dmatchdiff/
 RUN pip install -r /workspace/3dmatchdiff/requirements.txt
+
+COPY . /workspace/3dmatchdiff
+
 RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
 ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
 
 
-
-
+#RUN cd /workspace && git clone https://github.com/timzarhansen/3dmatchdiff.git
+#ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+#RUN #cd /workspace/3dmatchdiff/ && git pull
 
 ############################################# stuff for development
-# docker run --ipc=host --gpus all --name test -v /home/ubuntu/3dmatch:/workspace/3dmatch aws_test:latest
+# docker run --ipc=host --rm --gpus all --name test -v /home/ubuntu/3dmatch:/workspace/3dmatch aws_test:latest
 
 #alias nano='LD_LIBRARY_PATH="" command nano'
 
