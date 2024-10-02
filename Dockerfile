@@ -14,9 +14,9 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
 
-RUN mkdir /workspace
+#RUN mkdir /workspace
 
-ENV MAX_JOBS=8
+ENV MAX_JOBS=10
 RUN cd /workspace && git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
 RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
 
@@ -31,7 +31,7 @@ RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 COPY . /workspace/3dmatchdiff
 
 RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
-ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
+#ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
 
 
 #RUN cd /workspace && git clone https://github.com/timzarhansen/3dmatchdiff.git
