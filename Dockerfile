@@ -1,5 +1,5 @@
-#FROM pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
-FROM 763104351884.dkr.ecr.eu-central-1.amazonaws.com/pytorch-inference:2.2.0-gpu-py310-cu118-ubuntu20.04-ec2
+FROM pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
+#FROM 763104351884.dkr.ecr.eu-central-1.amazonaws.com/pytorch-inference:2.2.0-gpu-py310-cu118-ubuntu20.04-ec2
 ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 6.2 7.0 7.2 7.5 8.0 8.6 8.9"
 ENV TORCH_NVCC_FLAGS="-Xfatbin -compress-all"
 
@@ -39,7 +39,7 @@ ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
 #RUN #cd /workspace/3dmatchdiff/ && git pull
 
 ############################################# stuff for development
-# docker run --ipc=host --rm --gpus all --name test -v /home/ubuntu/3dmatch:/workspace/3dmatch aws_test:latest
+# docker run --ipc=host --rm -d --gpus all --name test -v /home/ubuntu/3dmatch:/workspace/3dmatch aws_test:latest
 
 #alias nano='LD_LIBRARY_PATH="" command nano'
 
