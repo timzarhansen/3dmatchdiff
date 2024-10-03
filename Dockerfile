@@ -30,8 +30,8 @@ RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 
 COPY . /workspace/3dmatchdiff
 
-RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
-#ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
+RUN chmod a+x /workspace/3dmatchdiff/testScripts/workstation_run_dgr.sh
+ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/workstation_run_dgr.sh"]
 
 
 #RUN cd /workspace && git clone https://github.com/timzarhansen/3dmatchdiff.git
@@ -39,7 +39,7 @@ RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
 #RUN #cd /workspace/3dmatchdiff/ && git pull
 
 ############################################# stuff for development
-# docker run --ipc=host --rm  '"device=0"' --name test -v /home/deeprobotics/dataFolder/3dmatch:/workspace/3dmatch aws_test:latest
+# docker run --ipc=host --rm --gpus '"device=0"' --name test -v /home/deeprobotics/dataFolder/3dmatch:/workspace/3dmatch deepregistrationimage:latest
 # -d means detatch
 # docker build -t deepregistrationimage .
 #alias nano='LD_LIBRARY_PATH="" command nano'
