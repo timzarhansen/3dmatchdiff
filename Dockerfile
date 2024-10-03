@@ -30,8 +30,10 @@ RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 
 COPY . /workspace/3dmatchdiff
 
-RUN chmod a+x /workspace/3dmatchdiff/testScripts/workstation_run_dgr.sh
-ENTRYPOINT ["cd / && ./workspace/3dmatchdiff/testScripts/workstation_run_dgr.sh"]
+WORKDIR /workspace
+
+RUN chmod a+x 3dmatchdiff/testScripts/workstation_run_dgr.sh
+ENTRYPOINT ["./3dmatchdiff/testScripts/workstation_run_dgr.sh"]
 
 
 #RUN cd /workspace && git clone https://github.com/timzarhansen/3dmatchdiff.git
