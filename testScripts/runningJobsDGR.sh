@@ -10,6 +10,10 @@ val_max_iter=10
 
 additionalSettings=--max_epoch $numberofepochs --test_valid $validation --threed_match_dir $datasetdir --weights $weights --val_max_iter $val_max_iter --use_gpu $use_gpu
 
+
+echo $additionalSettings
+sleep $sleeptimebetweenruns
+sleep $sleeptimebetweenruns
 #python mainPredator.py predator/configs/train/indoor.yaml
 export OMP_NUM_THREADS=10;
 python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/3dmatch/output/deepGlobalRegistration/10' \
