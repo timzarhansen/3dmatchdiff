@@ -51,7 +51,7 @@ RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 #
 #
 #RUN #conda install --yes --file requirements.txt 2
-
+#tensorboard --logdir='/your/path/here'
 
 #python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/data/results/test1' --threed_match_dir '/workspace/data/threedmatch' --weights '/workspace/data/FCGF/2019-08-16_19-21-47.pth' --use_gpu false
 

@@ -1,12 +1,12 @@
 #! /bin/bash
-numberofepochs=1
+numberofepochs=100
 validation=True
 sleeptimebetweenruns=10
 weights='/workspace/3dmatch/models/deepGlobalRegistration/dlModels/2019-08-16_19-21-47.pth'
 datasetdir='/workspace/3dmatch/models/deepGlobalRegistration/data/threedmatch'
 nn_max_n=200
 use_gpu=True
-val_max_iter=10
+val_max_iter=400
 
 
 #python mainPredator.py predator/configs/train/indoor.yaml

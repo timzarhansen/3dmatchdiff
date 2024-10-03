@@ -36,8 +36,10 @@
 
 
   "mounts": [
-    "source=/home/tim-external/dataFolder/3dmatch,target=/workspace/3dmatch,type=bind,consistency=cached"
-  ]
+    "source=/home/tim-external/dataFolder/3dmatch,target=/workspace/3dmatch,type=bind,consistency=cached",
+    "source=/home/tim-external/tensorboard,target=/workspace/tensorboard,type=bind,consistency=cached"
+  ],
+  "forwardPorts": [6006]
 
   // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "devcontainer"
