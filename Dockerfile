@@ -41,20 +41,24 @@ ENTRYPOINT ["./3dmatchdiff/testScripts/workstation_run_dgr.sh"]
 #RUN #cd /workspace/3dmatchdiff/ && git pull
 
 ############################################# stuff for development
-# docker run --ipc=host --rm --gpus '"device=0"' --name test -v /home/deeprobotics/dataFolder/3dmatch:/workspace/3dmatch deepregistrationimage:latest
+# docker run -t -i -d --ipc=host --rm --gpus '"device=0"' --name test -v /home/deeprobotics/dataFolder/3dmatch:/workspace/3dmatch deepregistrationimage:latest
 # -d means detatch
 # docker build -t deepregistrationimage .
-#alias nano='LD_LIBRARY_PATH="" command nano'
 
 
-#RUN #bash /workspace/3dmatchdiff/deepGlobalRegistration/scripts/download_3dmatch.sh /workspace/data
-#
-#RUN #wget https://node1.chrischoy.org/data/publications/fcgf/2019-08-16_19-21-47.pth -P /workspace/data/FCGF/
-##cd /opt/directory/
-#
-#
-#RUN #conda install --yes --file requirements.txt 2
 
 
-#python trainDeepGlobaleRegistration.py --timnoise true --timnoiseval true --timnoisevar 0.05 --out_dir '/workspace/data/results/test1' --threed_match_dir '/workspace/data/threedmatch' --weights '/workspace/data/FCGF/2019-08-16_19-21-47.pth' --use_gpu false
+
+
+
+
+
+
+
+
+
+
+
+
+
 
