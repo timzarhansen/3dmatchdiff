@@ -16,7 +16,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 #RUN mkdir /workspace
 
-ENV MAX_JOBS=10
+ENV MAX_JOBS=4
 RUN cd /workspace && git clone --recursive "https://github.com/NVIDIA/MinkowskiEngine"
 RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=openblas
 
@@ -28,9 +28,9 @@ RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=o
 COPY requirements.txt /workspace/3dmatchdiff/
 RUN pip install -r /workspace/3dmatchdiff/requirements.txt
 
-COPY . /workspace/3dmatchdiff
-
-RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
+#COPY . /workspace/3dmatchdiff
+#
+#RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
 #ENTRYPOINT ["./workspace/3dmatchdiff/testScripts/aws_run_dgr.sh"]
 
 
@@ -39,9 +39,8 @@ RUN chmod a+x /workspace/3dmatchdiff/testScripts/aws_run_dgr.sh
 #RUN #cd /workspace/3dmatchdiff/ && git pull
 
 ############################################# stuff for development
-# docker run --ipc=host --rm  '"device=0"' --name test -v /home/deeprobotics/dataFolder/3dmatch:/workspace/3dmatch aws_test:latest
-# -d means detatch
-# docker build -t deepregistrationimage .
+# docker run --ipc=host --rm -d --gpus all --name test -v /home/ubuntu/3dmatch:/workspace/3dmatch aws_test:latest
+
 #alias nano='LD_LIBRARY_PATH="" command nano'
 
 

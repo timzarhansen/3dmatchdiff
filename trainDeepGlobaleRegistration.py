@@ -50,7 +50,7 @@ def main(config, resume=False):
       data_loader=train_loader,
       val_data_loader=val_loader,
   )
-
+  # print("training:")
   trainer.train()
 
 

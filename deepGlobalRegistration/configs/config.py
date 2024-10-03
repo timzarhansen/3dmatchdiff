@@ -22,7 +22,7 @@ def str2bool(v):
 
 # yapf: disable
 logging_arg = add_argument_group('Logging')
-logging_arg.add_argument('--out_dir', type=str, default='/home/tim-external/dataFolder/3dmatch/models/deepGlobalRegistration/test/')
+logging_arg.add_argument('--out_dir', type=str, default='/workspace/3dmatch/models/deepGlobalRegistration/test/')
 
 trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
@@ -101,8 +101,8 @@ opt_arg.add_argument('--icp_cache_path', type=str, default="icp")
 
 # Misc
 misc_arg = add_argument_group('Misc')
-misc_arg.add_argument('--use_gpu', type=str2bool, default=True)
-misc_arg.add_argument('--weights', type=str, default='/home/tim-external/dataFolder/3dmatch/models/deepGlobalRegistration/dlModels/2019-08-16_19-21-47.pth')
+misc_arg.add_argument('--use_gpu', type=str2bool, default=False)
+misc_arg.add_argument('--weights', type=str, default='/workspace/3dmatch/models/deepGlobalRegistration/dlModels/2019-08-16_19-21-47.pth')
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)
 misc_arg.add_argument('--resume_dir', type=str, default=None)
@@ -117,7 +117,7 @@ data_arg = add_argument_group('Data')
 data_arg.add_argument('--dataset', type=str, default='ThreeDMatchPairDataset03')
 data_arg.add_argument('--voxel_size', type=float, default=0.05)
 # data_arg.add_argument('--threed_match_dir', type=str, default='.')
-data_arg.add_argument('--threed_match_dir', type=str, default='/home/tim-external/dataFolder/3dmatch/models/deepGlobalRegistration/data/threedmatch')
+data_arg.add_argument('--threed_match_dir', type=str, default='/workspace/3dmatch/models/deepGlobalRegistration/data/threedmatch')
 
 data_arg.add_argument('--kitti_dir', type=str, default=None, help="Path to the KITTI odometry dataset. This path should contain <kitti_dir>/dataset/sequences.")
 data_arg.add_argument('--kitti_max_time_diff', type=int, default=3, help='max time difference between pairs (non inclusive)')
