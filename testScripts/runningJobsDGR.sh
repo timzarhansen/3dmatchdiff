@@ -4,7 +4,7 @@ validation=True
 sleeptimebetweenruns=10
 weights='/workspace/3dmatch/models/deepGlobalRegistration/dlModels/2019-08-16_19-21-47.pth'
 datasetdir='/workspace/3dmatch/models/deepGlobalRegistration/data/threedmatch'
-nn_max_n=200
+nn_max_n=150
 use_gpu=True
 val_max_iter=400
 

@@ -28,7 +28,7 @@ trainer_arg = add_argument_group('Trainer')
 trainer_arg.add_argument('--trainer', type=str, default='WeightedProcrustesTrainer')
 
 # Batch setting
-trainer_arg.add_argument('--batch_size', type=int, default=4)
+trainer_arg.add_argument('--batch_size', type=int, default=2)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 # Data loader configs

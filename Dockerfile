@@ -41,8 +41,9 @@ ENTRYPOINT ["./3dmatchdiff/testScripts/workstation_run_dgr.sh"]
 #RUN #cd /workspace/3dmatchdiff/ && git pull
 
 ############################################# stuff for development
-# docker run -t -i -d --ipc=host --rm --gpus '"device=0"' --name test -v /home/deeprobotics/dataFolder/3dmatch:/workspace/3dmatch deepregistrationimage:latest
+# docker run -t -i -d --ipc=host --gpus '"device=0"' --name test -v /home/deeprobotics/dataFolder/3dmatch:/workspace/3dmatch deepregistrationimage:latest
 # -d means detatch
+# --rm removes container after termination
 # docker build -t deepregistrationimage .
 
 
