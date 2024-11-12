@@ -21,7 +21,7 @@ class KPFCNN(nn.Module):
         self.K = config.num_kernel_points
         self.epsilon = torch.nn.Parameter(torch.tensor(-5.0))
         self.final_feats_dim = config.final_feats_dim
-        self.condition = config.condition_feature
+        self.condition = config.condition_featuret
         self.add_cross_overlap = config.add_cross_score
 
         #####################
@@ -163,7 +163,7 @@ class KPFCNN(nn.Module):
         src_feats_c, tgt_feats_c= self.gnn(src_pcd_c.unsqueeze(0).transpose(1,2), tgt_pcd_c.unsqueeze(0).transpose(1,2),src_feats_c, tgt_feats_c)
         feats_c = torch.cat([src_feats_c, tgt_feats_c], dim=-1)
 
-        feats_c = self.proj_gnn(feats_c)   
+        feats_c = self.proj_gnn(feats_c)
         scores_c =  self.proj_score(feats_c)
 
         feats_gnn_norm = F.normalize(feats_c, p=2, dim=1).squeeze(0).transpose(0,1)  #[N, C]

@@ -23,6 +23,11 @@ from torch.utils.data import (
 )  # Gives easier dataset managment and creates mini batches
 from torch.utils.tensorboard import SummaryWriter  # to print to tensorboard
 
+
+
+
+
+
 # Simple CNN
 class CNN(nn.Module):
     def __init__(self, in_channels=1, num_classes=10):
@@ -34,7 +39,11 @@ class CNN(nn.Module):
         self.conv2 = nn.Conv2d(
             in_channels=8, out_channels=16, kernel_size=3, stride=1, padding=1
         )
+        self.conv3 = nn.Conv2d(
+            in_channels=16, out_channels=32, kernel_size=3, stride=1, padding=1
+        )
         self.fc1 = nn.Linear(16 * 7 * 7, num_classes)
+
 
     def forward(self, x):
         x = F.relu(self.conv1(x))
@@ -53,6 +62,7 @@ class FNN(nn.Module):
         self.fc2 = nn.Linear(14*14,7*7)
         self.fc3 = nn.Linear(7*7,7*7)
         self.fc4 = nn.Linear(7*7,num_classes)
+
 
     def forward(self, x):
         x = self.fc1(x)
