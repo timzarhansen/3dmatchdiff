@@ -106,7 +106,9 @@ def to_o3d_pcd(xyz):
     xyz:       [N, 3]
     """
     pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(to_array(xyz))
+    numpyArray = to_array(xyz)
+    numpyArray = np.float64(numpyArray)
+    pcd.points = o3d.utility.Vector3dVector(numpyArray)
     return pcd
 
 def to_o3d_feats(embedding):
@@ -114,8 +116,12 @@ def to_o3d_feats(embedding):
     Convert tensor/array to open3d features
     embedding:  [N, 3]
     """
-    feats = o3d.registration.Feature()
-    feats.data = to_array(embedding).T
+    feats = o3d.pipelines.registration.Feature()
+    feats.resize(embedding.shape[1], embedding.shape[0])
+    print(feats.data[1,2])
+    embeddinInput = np.float64(to_array(embedding).T)
+    feats.data = np.random.rand(embedding.shape[1], embedding.shape[0]).astype(np.float64)
+    feats.data = embeddinInput
     return feats
 
 def get_correspondences(src_pcd, tgt_pcd, trans, search_voxel_size, K=None):

@@ -1,0 +1,46 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+  "name": "3dmatch",
+  "build": {
+    // Sets the run context to one level up instead of the .devcontainer folder.
+    "context": "..",
+    // Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+    "dockerfile": "DockerfileDevelopment"
+  },
+
+  "runArgs": [ "--ipc=host" ],
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Uncomment the next line to run commands after the container is created.
+  // "postCreateCommand": "cat /etc/os-release",
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "jetbrains": {
+      "backend": "PyCharm"
+    }
+  },
+//  "mounts": [
+//    {
+//      "source": "/home/tim-external/dataFolder/3dmatch/",
+//      "target": "/datafolder/",
+//      "type": "volume"
+//    }
+//  ],
+
+
+
+  "mounts": [
+    "source=/home/tim-external/dataFolder/3dmatch,target=/workspace/3dmatch,type=bind,consistency=cached",
+    "source=/home/tim-external/tensorboard,target=/workspace/tensorboard,type=bind,consistency=cached"
+  ],
+  "forwardPorts": [6006]
+
+  // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "devcontainer"
+}

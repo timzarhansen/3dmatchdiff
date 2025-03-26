@@ -25,8 +25,8 @@ RUN cd /workspace/MinkowskiEngine; python setup.py install --force_cuda --blas=o
 
 #this line is only for not caching anything
 
-COPY requirements.txt /workspace/3dmatchdiff/
-RUN pip install -r /workspace/3dmatchdiff/requirements.txt
+COPY requirementsMac.txt /workspace/3dmatchdiff/
+RUN pip install -r /workspace/3dmatchdiff/requirementsMac.txt
 
 #COPY . /workspace/3dmatchdiff
 #

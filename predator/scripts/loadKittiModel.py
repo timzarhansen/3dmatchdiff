@@ -13,15 +13,17 @@ from torch.utils.data import Dataset
 from torch import optim, nn
 import open3d as o3d
 
+
 cwd = os.getcwd()
 sys.path.append(cwd)
-from predator.datasets.indoor import IndoorDataset
-from predator.datasets.dataloader import get_dataloader
-from predator.models.architectures import KPFCNN
-from predator.lib.utils import load_obj, setup_seed,natural_key, load_config
-from predator.lib.benchmark_utils import ransac_pose_estimation, to_o3d_pcd, get_blue, get_yellow, to_tensor
-from predator.lib.trainer import Trainer
-from predator.lib.loss import MetricLoss
+
+from  predator.datasets.indoor import IndoorDataset
+from  predator.datasets.dataloader import get_dataloader
+from  predator.models.architectures import KPFCNN
+from  predator.lib.utils import load_obj, setup_seed,natural_key, load_config
+from  predator.lib.benchmark_utils import ransac_pose_estimation, to_o3d_pcd, get_blue, get_yellow, to_tensor
+from  predator.lib.trainer import Trainer
+from  predator.lib.loss import MetricLoss
 import shutil
 setup_seed(0)
 
@@ -46,8 +48,12 @@ class ThreeDMatchDemo(Dataset):
 
     def __getitem__(self,item): 
         # get pointcloud
-        src_pcd = torch.load(self.src_path).astype(np.float32)
-        tgt_pcd = torch.load(self.tgt_path).astype(np.float32)   
+        pcd1 = o3d.io.read_point_cloud(self.src_path)
+        pcd2 = o3d.io.read_point_cloud(self.tgt_path)
+        # src_pcd = torch.load(self.src_path).astype(np.float32)
+        # tgt_pcd = torch.load(self.tgt_path).astype(np.float32)
+        src_pcd = np.array(pcd1.points)
+        tgt_pcd = np.array(pcd2.points)
         
         
         #src_pcd = o3d.io.read_point_cloud(self.src_path)
@@ -147,10 +153,10 @@ def main(config, demo_loader):
     config.model.eval()
     c_loader_iter = demo_loader.__iter__()
     with torch.no_grad():
-        inputs = c_loader_iter.next()
+        inputs = next(c_loader_iter)
         ##################################
         # load inputs to device.
-        for k, v in inputs.items():  
+        for k, v in inputs.items():
             if type(v) == list:
                 inputs[k] = [item.to(config.device) for item in v]
             else:
@@ -193,6 +199,28 @@ def main(config, demo_loader):
         draw_registration_result(src_raw, tgt_raw, src_overlap, tgt_overlap, src_saliency, tgt_saliency, tsfm)
 
 
+def calculateOutput(pcl1, pcl2):
+    # get pointcloud
+    # src_pcd = torch.load(self.src_path).astype(np.float32)
+    # tgt_pcd = torch.load(self.tgt_path).astype(np.float32)
+    pcd1 = o3d.io.read_point_cloud(pcl1)
+    pcd2 = o3d.io.read_point_cloud(pcl2)
+
+    #sample down
+
+    src_pcd = np.array(pcd1.points)
+    tgt_pcd = np.array(pcd2.points)
+
+    src_feats = np.ones_like(src_pcd[:, :1]).astype(np.float32)
+    tgt_feats = np.ones_like(tgt_pcd[:, :1]).astype(np.float32)
+
+    # fake the ground truth information
+    rot = np.eye(3).astype(np.float32)
+    trans = np.ones((3, 1)).astype(np.float32)
+    correspondences = torch.ones(1, 2).long()
+
+    return src_pcd, tgt_pcd, src_feats, tgt_feats, rot, trans, correspondences, src_pcd, tgt_pcd, torch.ones(1)
+
 if __name__ == '__main__':
     # load configs
     print("lets start stuff ")
@@ -223,25 +251,53 @@ if __name__ == '__main__':
     config.model = KPFCNN(config).to(config.device)
     
     # create dataset and dataloader
-    info_train = load_obj(config.train_info)
-    train_set = IndoorDataset(info_train,config,data_augmentation=True)
+    # info_train = load_obj(config.train_info)
+    # train_set = IndoorDataset(info_train,config,data_augmentation=True)
     demo_set = ThreeDMatchDemo(config, config.src_pcd, config.tgt_pcd)
 
-    _, neighborhood_limits = get_dataloader(dataset=train_set,
-                                        batch_size=config.batch_size,
-                                        shuffle=True,
-                                        num_workers=config.num_workers,
-                                        )
+    # _, neighborhood_limits = get_dataloader(dataset=train_set,
+    #                                     batch_size=config.batch_size,
+    #                                     shuffle=True,
+    #                                     num_workers=config.num_workers,
+    #                                     )
+    # demo_loader, _ = get_dataloader(dataset=demo_set,
+    #                                     batch_size=config.batch_size,
+    #                                     shuffle=False,
+    #                                     num_workers=1,
+    #                                     neighborhood_limits=neighborhood_limits)
     demo_loader, _ = get_dataloader(dataset=demo_set,
                                         batch_size=config.batch_size,
                                         shuffle=False,
                                         num_workers=1,
-                                        neighborhood_limits=neighborhood_limits)
-
+                                        neighborhood_limits=None)
     # load pretrained weights
     assert config.pretrain != None
-    state = torch.load(config.pretrain)
+    state = torch.load(config.pretrain,map_location=config.device)
     config.model.load_state_dict(state['state_dict'])
 
-    # do pose estimation
+    print("loaded pretrained model")
+
+    # config.model.eval()
+
+    inputs = calculateOutput(config.src_pcd,config.tgt_pcd)
+
+    feats = o3d.pipelines.registration.Feature()
+    feats.resize(32, 100)
+    # print(feats.data[1, 2])
+    feats.data = np.random.rand( 32,100).astype(np.float64)
+    # feats.data = embeddinInput
+    # return feats
+
+
+
+
+
     main(config, demo_loader)
+
+
+
+
+
+
+    # do pose estimation
+

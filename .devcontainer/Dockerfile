@@ -45,21 +45,3 @@ ENTRYPOINT ["./3dmatchdiff/testScripts/workstation_run_dgr.sh"]
 # -d means detatch
 # --rm removes container after termination
 # docker build -t deepregistrationimage .
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
