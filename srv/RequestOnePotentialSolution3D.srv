@@ -1,0 +1,4 @@
+sensor_msgs/PointCloud2 pcl_scan_1
+sensor_msgs/PointCloud2 pcl_scan_2
+---
+geometry_msgs/Pose resulting_transformation
